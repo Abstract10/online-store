@@ -1,0 +1,39 @@
+ <!-- here  we make the 3 button for flter with refernce of pages , item and change the product o f layout -->
+<mat-card class ="mb-4">
+    <div class ="flex justify-between">
+ <div>
+    <button mat-button [matMenuTriggerFor]="sortByMenu">
+    <!-- variable which done upfate wth help of interpolation, and evnet binding -->
+        sort by {{sort}}
+        <mat-icon>expand_more</mat-icon>
+    </button>
+    <mat-menu #sortByMenu="matMenu">
+        <button (click)="onsortupdate('desc')"mat-menu-item>desc</button>
+        <button (click)="onsortupdate('asc')"mat-menu-item>asc</button> 
+        
+    </mat-menu>
+ </div>
+<div class="flex items-center">
+<div>
+          <button mat-button [matMenuTriggerFor]="menu">
+          show {{ itemsShowCount}}
+          <mat-icon>expand_more </mat-icon> 
+         </button>
+    <mat-menu #menu="matMenu">
+  <button (click)="onitemsupdate(12)" mat-menu-item>12</button>
+  <button (click)="onitemsupdate(24)" mat-menu-item>24</button>
+  <button (click)="onitemsupdate(36)" mat-menu-item>36</button>  
+</mat-menu>
+    </div>
+    <button>
+        <mat-icon (click)="onColumnsUpdated(1)">view_list</mat-icon>
+    </button>
+    <button>
+        <mat-icon (click)="onColumnsUpdated(3)">view_module</mat-icon>
+    </button>
+    <button>
+        <mat-icon (click)="onColumnsUpdated(4)">view_comfy</mat-icon>
+    </button>
+</div>
+</div>
+</mat-card> 
