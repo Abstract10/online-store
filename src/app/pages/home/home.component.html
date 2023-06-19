@@ -1,30 +1,33 @@
 <!-- /drwaing drwaer actas sidenav bar and pop in effect -->
+
+
 <mat-drawer-container
  [autosize]="true"
  class ="min-h-full max-w-7xl mx-auto border-x">
- <mat-drawer mode ="side" opened class="p-6">
-   <app-filters (showCatergory)="onShowCatergory($event)"> </app-filters>
-  
+ <mat-drawer mode = "side" opened class= "p-6">
+   <app-filters (showCatergory)= "onShowCatergory($event)"> </app-filters>
 
  </mat-drawer>
+
+
  <mat-drawer-content class ="p-6">
-    <app-product-header (columnsCountChange) ="onColumnCountChange($event)"></app-product-header>
+    <app-product-header (columnsCountChange) ="onColumnCountChange($event)"
+    (itemsCountChange)= "onItemsCountChange($event)"
+      (sortChange)= "onSortChange($event)">  </app-product-header>
    <mat-grid-list
      gutter-size="16"
      [cols] ="cols"
      [rowHeight]="rowHeight"
      >
-    <mat-grid-tile>
-      <app-product-box class="w-full" [fullWidthMode]="cols === 1"></app-product-box>
+    <mat-grid-tile *ngFor =" let product of product">
+      <!-- (click)="onAddToCart($event)" -->
+      <app-product-box [product]="product"
+          (addTocart)= "onAddToCart($event)"
+         
+          class = "w-full" [fullWidthMode] = "cols===1" >    </app-product-box>
     </mat-grid-tile>
-    <mat-grid-tile>
-      <app-product-box  class="w-full" [fullWidthMode]="cols === 1"></app-product-box>
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <app-product-box  class="w-full" [fullWidthMode]="cols === 1"></app-product-box>
-    </mat-grid-tile>
-   </mat-grid-list>
-
+    </mat-grid-list>
+    
  </mat-drawer-content>
   
 
