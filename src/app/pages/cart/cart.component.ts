@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { loadStripe } from '@stripe/stripe-js';
+import { async } from 'rxjs';
 import { Cart, CartItems} from "src/app/model/cart.model"
 import { CartService } from 'src/app/services/cart.service';
 // import {MatTableModule} from '@angular/material/table'
@@ -36,7 +39,7 @@ export class CartComponent implements OnInit {
   }
 ]
 };
-  constructor(private cartServices : CartService) { }
+  constructor(private cartServices : CartService , private httpClient : HttpClient) { }
   ///   properties for displaying the table 
    
 
@@ -76,6 +79,17 @@ export class CartComponent implements OnInit {
   onRemoveQuantity(item : CartItems){
     this.cartServices.removequantity(item);
 
+  }
+
+  onCheckout(): void {
+    this.httpClient.post('http://localhost:4242/checkout',{
+      items : this.cart.items
+    }).subscribe(async(res : any )=>{
+    let stripe = await loadStripe('pk_test_51NKzZtSFqe6YUHhUGnWC9UOCgG63qUxtROO87CSRiVOYY5T8ReF0c4aLGaSOoHoLlfgq2BF6MPJDAtHNHKxVRgcs00dEM233Jp') 
+     stripe?.redirectToCheckout({
+      sessionId: res.id
+     })
+    });
   }
   
 }

@@ -75,7 +75,9 @@ class="max-w-7xl mx-auto">
         </button>
       </td>
       <td mat-footer-cell *matFooterCellDef>
-        <button mat-raised-button color ="primary" class="float-right">
+        <button 
+        (click) = "onCheckout()"
+        mat-raised-button color ="primary" class="float-right">
           Proceed To Checkout </button>
       </td>
     </ng-container>
